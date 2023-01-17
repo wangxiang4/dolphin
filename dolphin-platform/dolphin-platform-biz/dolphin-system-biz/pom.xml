@@ -11,7 +11,7 @@
 	<artifactId>dolphin-system-biz</artifactId>
 	<packaging>jar</packaging>
 
-	<description>dolphin 系统模块</description>
+	<description>dolphin 系统业务模块</description>
 
 	<dependencies>
 		<!--oss文件管理-->

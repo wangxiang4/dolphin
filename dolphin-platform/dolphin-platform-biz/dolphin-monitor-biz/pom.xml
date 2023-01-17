@@ -11,7 +11,7 @@
 	<artifactId>dolphin-monitor-biz</artifactId>
 	<packaging>jar</packaging>
 
-	<description>dolphin 运维监控模块</description>
+	<description>dolphin 运维监控业务模块</description>
 
 	<dependencies>
 		<!--日志处理-->

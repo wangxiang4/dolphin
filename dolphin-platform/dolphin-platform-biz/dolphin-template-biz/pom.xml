@@ -11,7 +11,7 @@
 	<artifactId>dolphin-template-biz</artifactId>
 	<packaging>jar</packaging>
 
-	<description>dolphin 新建模块模板,只提供基础依赖</description>
+	<description>dolphin 新建业务模块模板,只提供基础依赖</description>
 
 	<dependencies>
 		<!--template api模块-->
