@@ -215,7 +215,7 @@
 				<artifactId>excel-spring-boot-starter</artifactId>
 				<version>${excel.version}</version>
 			</dependency>
-			<!--MacBook M1 DNS服务器地址解析器找不到
+			<!--MacBook M系列 DNS服务器地址解析器找不到
 			https://stackoverflow.com/questions/65954571/spring-boot-2-4-2-dns-resolution-problem-at-start-on-apple-m1-->
 			<dependency>
 				<groupId>io.netty</groupId>

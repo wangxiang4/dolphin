@@ -1,4 +1,4 @@
-package com.cloud.dolphin.monitor.config;
+package com.cloud.dolphin.dashboard.config;
 
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
 import lombok.SneakyThrows;

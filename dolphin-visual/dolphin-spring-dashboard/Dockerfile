@@ -1,10 +1,10 @@
 FROM moxm/java:1.8-full
 
-RUN mkdir -p /dolphin-monitor
+RUN mkdir -p /dolphin-spring-dashboard
 
-WORKDIR /dolphin-monitor
+WORKDIR /dolphin-spring-dashboard
 
-ARG JAR_FILE=target/dolphin-monitor.jar
+ARG JAR_FILE=target/dolphin-spring-dashboard.jar
 
 COPY ${JAR_FILE} app.jar
 

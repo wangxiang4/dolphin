@@ -133,10 +133,10 @@ services:
   # spring-admin配置
   dolphin-visual-monitor:
     build:
-      context: ../dolphin-visual/dolphin-monitor
+      context: ../dolphin-visual/dolphin-spring-dashboard
     container_name: dolphin-visual-monitor
     restart: always
-    image: dolphin-monitor
+    image: dolphin-spring-dashboard
     hostname: dolphin-visual-monitor
     ports:
       - 8061:8061

@@ -1,4 +1,4 @@
-package com.cloud.dolphin.monitor.converter;
+package com.cloud.dolphin.dashboard.converter;
 
 import de.codecentric.boot.admin.server.cloud.discovery.DefaultServiceInstanceConverter;
 import org.springframework.cloud.client.ServiceInstance;

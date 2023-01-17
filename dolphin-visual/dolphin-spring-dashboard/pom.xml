@@ -8,7 +8,7 @@
 		<version>1.0.0</version>
 	</parent>
 
-	<artifactId>dolphin-monitor</artifactId>
+	<artifactId>dolphin-spring-dashboard</artifactId>
 	<packaging>jar</packaging>
 
 	<description>dolphin 监控模块，基于 spring boot admin</description>
@@ -49,6 +49,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
 		</dependency>
 	</dependencies>
 

@@ -14,7 +14,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>dolphin-monitor</module>
+		<module>dolphin-spring-dashboard</module>
 		<module>dolphin-sentinel-dashboard</module>
 		<module>dolphin-xxl-job-admin</module>
 		<module>dolphin-rocketmq-dashboard</module>

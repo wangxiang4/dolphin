@@ -1,4 +1,4 @@
-package com.cloud.dolphin.monitor;
+package com.cloud.dolphin.dashboard;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
