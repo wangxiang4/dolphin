@@ -1,0 +1,131 @@
+jasypt:
+  # 加解密密钥
+  encryptor:
+    # 根密码
+    password: dolphin
+
+# spring配置
+spring:
+  mvc:
+    pathmatch:
+      # swagger未适配spring5新的路径匹配策略path_pattern_parser,会报错需要改回旧的策略
+      matching-strategy: ant_path_matcher 
+  redis:
+    database: 1
+    host: 127.0.0.1
+  cloud:
+    sentinel:
+      filter:
+        # 关闭内部拦截,与spring cloud 2021有不兼容的问题
+        enabled: false
+      # 取消Sentinel控制台懒加载
+      # 默认情况下 Sentinel 会在客户端首次调用的时候进行初始化,开始向控制台发送心跳包
+      # 配置 sentinel.eager=true 时,取消Sentinel控制台懒加载功能
+      eager: true
+      transport:
+        # Sentinel控制台地址,客户端需要通信时调用
+        dashboard: dolphin-visual-sentinel:8056
+
+# spring-boot-admin配置
+management:
+  endpoints:
+    web:
+      # 暴露所有监控点(监控请求url地址)配置
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      # 何时显示完整的健康信息,默认为NEVER都不显示,WHEN_AUTHORIZED当经过授权的用户显示,ALWAYS总是展示
+      show-details: ALWAYS
+
+# feign配置
+feign:
+  # 开启对sentinel的支持能提供接口调用自动熔断降级的功能
+  sentinel:
+    enabled: true
+  # 开启okhttp
+  okhttp:
+    enabled: true
+  # 关闭feign默认使用的jdk中的HttpURLConnection请求性能太低,集成别的组件来替换掉
+  httpclient:
+    enabled: false
+  client:
+    config:
+      default:
+        # 连接超时时间
+        connectTimeout: 10000
+        # 读超时时间
+        readTimeout: 10000
+  compression:
+    # 开启请求 GZIP 压缩,加快传输速度
+    request:
+      enabled: true
+    # 开启响应 GZIP 压缩,加快传输速度
+    response:
+      enabled: true
+
+# mybatis-plus配置
+mybatis-plus:
+  mapper-locations:
+    - classpath:mapper/**/*.xml
+  typeAliasesPackage: com.cloud.dolphin.**.entity  
+  global-config:
+    # 不显示banner
+    banner: false
+    # 数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: assign_id
+  configuration:
+    call-setters-on-nulls: true
+
+# spring security配置
+security:
+  oauth2:
+    # 目前资源服务器远程校验令牌RemoteTokenServices类未实现,目前支持本地校验
+    resource:
+      # 资源服务器负载均衡调用认证服务器
+      loadBalanced: true
+      # 认证服务器检测token地址
+      token-info-uri: http://dolphin-auth:3000/oauth/check_token
+    # 通用放行URL,服务个性化,授权资源,公开资源
+    ignore:
+      urls:
+        - /v2/api-docs
+        - /actuator/**
+
+# 防止XSS攻击
+xss:
+  # 过滤开关
+  enabled: false
+  # 排除链接（多个用逗号分隔）
+  # excludes:
+  # 匹配链接
+  urlPatterns: /system/*
+
+# swagger接口文档配置
+swagger:
+  enabled: true
+  title: 海豚微服务开放平台_接口文档
+  description: 海豚微服务开放平台
+  version: 1.0.0
+  terms-of-service-url: https://godolphinx.org
+  contact:
+    name: wangxaing4
+    email: 1827945911@qq.com
+  authorization:
+    name: dolphin-oauth
+    # 需要开启鉴权URL的正则,默认^.*$匹配所有URL
+    auth-regex: ^.*$
+    authorization-scope-list:
+      - scope: server
+        description: server all
+    token-url-list:
+      - http://${GATEWAY_HOST:dolphin-gateway}:${GATEWAY-PORT:9999}/auth_proxy/oauth/token
+
+# 日志配置
+logging:
+  level:
+    com.cloud.dolphin: debug
+    org.springframework: WARN
+    org.spring.springboot.dao: debug

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.cloud</groupId>
+		<artifactId>dolphin-platform-biz</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<artifactId>dolphin-template-biz</artifactId>
+	<packaging>jar</packaging>
+
+	<description>dolphin 新建模块模板,只提供基础依赖</description>
+
+	<dependencies>
+		<!--template api模块-->
+		<dependency>
+			<groupId>com.cloud</groupId>
+			<artifactId>dolphin-template-api</artifactId>
+		</dependency>
+		<!--安全模块-->
+		<dependency>
+			<groupId>com.cloud</groupId>
+			<artifactId>dolphin-common-security</artifactId>
+		</dependency>
+		<!--日志处理-->
+		<dependency>
+			<groupId>com.cloud</groupId>
+			<artifactId>dolphin-common-log</artifactId>
+		</dependency>
+		<!--接口文档-->
+		<dependency>
+			<groupId>com.cloud</groupId>
+			<artifactId>dolphin-common-swagger</artifactId>
+		</dependency>
+		<!--注册中心客户端-->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+		</dependency>
+		<!--配置中心客户端-->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+		</dependency>
+		<!--undertow容器-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
+		<!--模拟测试-->
+		<dependency>
+			<groupId>com.cloud</groupId>
+			<artifactId>dolphin-common-mock</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

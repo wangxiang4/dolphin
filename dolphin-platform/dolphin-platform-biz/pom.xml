@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.cloud</groupId>
+        <artifactId>dolphin-platform</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>dolphin-platform-biz</artifactId>
+
+    <description>dolphin 框架平台业务模块</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>dolphin-system-biz</module>
+        <module>dolphin-common-biz</module>
+        <module>dolphin-monitor-biz</module>
+        <module>dolphin-template-biz</module>
+    </modules>
+
+</project>

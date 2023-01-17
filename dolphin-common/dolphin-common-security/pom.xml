@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.cloud</groupId>
+		<artifactId>dolphin-common</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<artifactId>dolphin-common-security</artifactId>
+	<packaging>jar</packaging>
+
+	<description>dolphin 安全工具类</description>
+
+	<!--考虑这个作为一个单模块使用,目前依赖了工具类核心包与system接口模块,后续引入依赖需要注意低耦合-->
+	<dependencies>
+		<!--工具类核心包-->
+		<dependency>
+			<groupId>com.cloud</groupId>
+			<artifactId>dolphin-common-core</artifactId>
+		</dependency>
+		<!--安全模块-->
+		<dependency>
+			<groupId>org.springframework.security.oauth.boot</groupId>
+			<artifactId>spring-security-oauth2-autoconfigure</artifactId>
+		</dependency>
+		<!--system API-->
+		<dependency>
+			<groupId>com.cloud</groupId>
+			<artifactId>dolphin-system-api</artifactId>
+		</dependency>
+	</dependencies>
+</project>

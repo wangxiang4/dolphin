@@ -1,0 +1,23 @@
+# PROJECT: dolphin
+# VERSION: 1.0.0
+# Author: wangxiang4
+
+# 更多信息请参考官网:https://docs.gitea.io/en-us/install-with-docker/
+version: "3"
+services:
+
+  # 团队项目生命周期管理工具
+  jira:
+    build:
+      context: ./image
+    container_name: jira
+    image: jira
+    hostname: jira
+    restart: always
+    ports:
+      - 9300:8080
+    volumes:
+      - /usr/software/dockerDatabase/jira/data:/var/atlassian/jira
+      - /usr/software/dockerDatabase/jira/logs:/opt/atlassian/jira/logs
+      - /usr/share/zoneinfo/Asia/Shanghai:/usr/share/zoneinfo/Asia/Shanghai
+      - /etc/localtime:/etc/localtime

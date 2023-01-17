@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.cloud</groupId>
+	<artifactId>dolphin-common-bom</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+
+	<name>dolphin-common-bom</name>
+	<description>全局jar BOM标准定义(可以设置工程内部的jar的标准,也可以设置第三方依赖jar的标准)</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<dolphin.common.version>${project.version}</dolphin.common.version>
+		<spring-boot.version>2.6.3</spring-boot.version>
+		<security.oauth.version>2.1.8.RELEASE</security.oauth.version>
+		<cloud.stream.version>3.0.13.RELEASE</cloud.stream.version>
+		<alibaba-seata.version>2021.0.1.0</alibaba-seata.version>
+		<log4j2.version>2.17.1</log4j2.version>
+		<fastjson.version>1.2.78</fastjson.version>
+		<swagger.core.version>1.5.24</swagger.core.version>
+		<mybatis-plus.version>3.5.1</mybatis-plus.version>
+		<sms.version>1.2.0</sms.version>
+		<git.commit.plugin>4.9.9</git.commit.plugin>
+		<spring.checkstyle.plugin>0.0.29</spring.checkstyle.plugin>
+		<captcha.version>2.2.1</captcha.version>
+		<oss.version>1.0.3</oss.version>
+		<excel.version>1.1.1</excel.version>
+		<velocity.version>2.3</velocity.version>
+		<netty-all.version>4.1.72.Final</netty-all.version>
+	</properties>
+
+	<!-- 定义全局jar版本,模块使用需要再次引入但不用写版本号-->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>dolphin-common-core</artifactId>
+				<version>${dolphin.common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>dolphin-common-data</artifactId>
+				<version>${dolphin.common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>dolphin-common-datasource</artifactId>
+				<version>${dolphin.common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>dolphin-common-feign</artifactId>
+				<version>${dolphin.common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>dolphin-common-rocketmq</artifactId>
+				<version>${dolphin.common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>dolphin-common-seata</artifactId>
+				<version>${dolphin.common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>dolphin-common-job</artifactId>
+				<version>${dolphin.common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>dolphin-common-log</artifactId>
+				<version>${dolphin.common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>dolphin-common-mock</artifactId>
+				<version>${dolphin.common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>dolphin-common-security</artifactId>
+				<version>${dolphin.common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>dolphin-common-swagger</artifactId>
+				<version>${dolphin.common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>dolphin-common-api</artifactId>
+				<version>${dolphin.common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>dolphin-system-api</artifactId>
+				<version>${dolphin.common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>dolphin-monitor-api</artifactId>
+				<version>${dolphin.common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>dolphin-template-api</artifactId>
+				<version>${dolphin.common.version}</version>
+			</dependency>
+			<!--最新版本2021.1 com.alibaba.cloud.seata.rest.SeataRestTemplateAutoConfiguration有自调Bean问题
+				与当前 spring cloud 2021 不兼容,更换2021.0.1.0兼容版本-->
+			<dependency>
+				<groupId>com.alibaba.cloud</groupId>
+				<artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+				<version>${alibaba-seata.version}</version>
+			</dependency>
+			<!--稳定版本，目前最新版采用函数编程经过测试rocketMQ消费者接受消息收不到，
+				目前最新版适配还存在一定的问题，替代spring-cloud-starter-stream-rocketmq2021.1 bom内置-->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-stream</artifactId>
+				<version>${cloud.stream.version}</version>
+			</dependency>
+			<!--稳定版本，替代spring security2.6.3 bom内置-->
+			<dependency>
+				<groupId>org.springframework.security.oauth.boot</groupId>
+				<artifactId>spring-security-oauth2-autoconfigure</artifactId>
+				<version>${security.oauth.version}</version>
+			</dependency>
+			<!--swagger 最新依赖内置版本-->
+			<dependency>
+				<groupId>io.swagger</groupId>
+				<artifactId>swagger-models</artifactId>
+				<version>${swagger.core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.swagger</groupId>
+				<artifactId>swagger-annotations</artifactId>
+				<version>${swagger.core.version}</version>
+			</dependency>
+			<!--fastjson 版本-->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
+			</dependency>
+			<!--阿里云短信服务-->
+			<dependency>
+				<groupId>cn.javaer.aliyun</groupId>
+				<artifactId>aliyun-spring-boot-starter-sms</artifactId>
+				<version>${sms.version}</version>
+			</dependency>
+			<!--orm mybatis-plus相关-->
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>${mybatis-plus.version}</version>
+			</dependency>
+			<!--mybatis-generator-->
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-generator</artifactId>
+				<version>${mybatis-plus.version}</version>
+			</dependency>
+			<!--velocity模板引擎生成简单crud代码-->
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity-engine-core</artifactId>
+				<version>${velocity.version}</version>
+			</dependency>
+			<!--web 模块-->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
+				<version>${spring-boot.version}</version>
+				<exclusions>
+					<!--排除tomcat依赖,使用undertow容器-->
+					<exclusion>
+						<artifactId>spring-boot-starter-tomcat</artifactId>
+						<groupId>org.springframework.boot</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!--指定 log4j 版本-->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-bom</artifactId>
+				<version>${log4j2.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!--oss文件管理,采用S3协议封装,兼容阿里云OSS,腾讯云COS,七牛云,京东云,minio 等不需要引入对应厂商的SDK就可以使用厂商的OSS服务
+			代码开源地址: https://github.com/pig-mesh/oss-spring-boot-starter -->
+			<dependency>
+				<groupId>com.pig4cloud.plugin</groupId>
+				<artifactId>oss-spring-boot-starter</artifactId>
+				<version>${oss.version}</version>
+			</dependency>
+			<!-- 验证码处理支持很多种验证码风格基于google的aviator计算引擎实现,性能比较高效
+			代码开源地址： https://github.com/pig-mesh/easy-captcha -->
+			<dependency>
+				<groupId>com.pig4cloud.plugin</groupId>
+				<artifactId>captcha-spring-boot-starter</artifactId>
+				<version>${captcha.version}</version>
+			</dependency>
+			<!-- excel 导入导出处理,基于alibaba的EasyExcel实现,读取大文件不怎么吃内存,性能比较高效
+			代码开源地址： https://github.com/pig-mesh/excel-spring-boot-starter -->
+			<dependency>
+				<groupId>com.pig4cloud.excel</groupId>
+				<artifactId>excel-spring-boot-starter</artifactId>
+				<version>${excel.version}</version>
+			</dependency>
+			<!--MacBook M1 DNS服务器地址解析器找不到
+			https://stackoverflow.com/questions/65954571/spring-boot-2-4-2-dns-resolution-problem-at-start-on-apple-m1-->
+			<dependency>
+				<groupId>io.netty</groupId>
+				<artifactId>netty-all</artifactId>
+				<version>${netty-all.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<!--maven打包插件(打jar包会在classes生成git.properties文件包含了目前git相关信息方便查看git环境错误)-->
+			<plugin>
+				<groupId>io.github.git-commit-id</groupId>
+				<artifactId>git-commit-id-maven-plugin</artifactId>
+				<version>${git.commit.plugin}</version>
+			</plugin>
+			<!--代码格式插件,默认使用spring 规则,跟前端EsLine一样保证代码规范-->
+			<plugin>
+				<groupId>io.spring.javaformat</groupId>
+				<artifactId>spring-javaformat-maven-plugin</artifactId>
+				<version>${spring.checkstyle.plugin}</version>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

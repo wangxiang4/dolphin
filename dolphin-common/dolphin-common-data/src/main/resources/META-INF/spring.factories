@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.cloud.dolphin.common.data.config.MybatisConfiguration,\
+    com.cloud.dolphin.common.data.config.RedisTemplateConfiguration

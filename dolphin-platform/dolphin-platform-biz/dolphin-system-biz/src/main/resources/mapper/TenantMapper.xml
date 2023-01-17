@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.dolphin.system.mapper.TenantMapper">
+
+    <select id="selectTenantCodeByRoleId" parameterType="String" resultType="String">
+        select t.code from sys_tenant t
+        inner join sys_role_tenant rt on t.id = rt.multi_tenant_id
+        inner join sys_role r on rt.role_id = r.id
+        where
+        t.del_flag = 0 and r.del_flag = 0 and
+        t.status = 0 and r.status = 0 and
+        current_timestamp between t.tenant_start_time and t.tenant_end_time and
+        rt.role_id = #{roleId}
+        order by t.create_time
+    </select>
+
+</mapper>

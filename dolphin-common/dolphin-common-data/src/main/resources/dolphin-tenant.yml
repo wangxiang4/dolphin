@@ -1,0 +1,4 @@
+tenant:
+  # 需要排除的多租户的表
+  exclusionTable:
+    - sys_tenant

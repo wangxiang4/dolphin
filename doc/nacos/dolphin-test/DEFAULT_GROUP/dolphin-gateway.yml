@@ -1,0 +1,64 @@
+spring:
+  cloud:
+    gateway:
+      # 开启跨域,放行任何跨域请求,开发环境可以允许网关工程跨域
+      globalcors:
+        corsConfigurations:
+          '[/auth_proxy/**,/common_proxy/**]':
+            allowedOriginPatterns: "*"
+            allowed-methods: "*"
+            allowed-headers: "*"
+            allow-credentials: true
+            exposedHeaders: "Content-Disposition,Content-Type,Cache-Control"
+      # 自动根据服务ID建立路由
+      locator:
+        enabled: true
+      routes:
+        # 认证中心
+        - id: dolphin-auth
+          uri: lb://dolphin-auth
+          predicates:
+            - Path=/auth_proxy/**
+          filters:
+            # 验证码处理
+            - ValidateCodeGatewayFilter
+            # 前端密码解密
+            - PasswordDecoderFilter
+        # system 模块
+        - id: dolphin-system-biz
+          uri: lb://dolphin-system-biz
+          predicates:
+            - Path=/system_proxy/**
+          filters:
+            # 限流配置
+            - name: RequestRateLimiter
+              args:
+                # 使用SpEL表达式从Spring容器中获取Bean对象,基于什么限流配置
+                key-resolver: '#{@remoteAddrKeyResolver}'
+                # 限频的频率,每秒请求次数,设置每秒最大请求次数100
+                redis-rate-limiter.replenishRate: 100
+                # 系统按照恒定间隔向水桶里加入令牌,设置最大为200个令牌容量,如果没有令牌可拿,那么就拒绝服务。
+                redis-rate-limiter.burstCapacity: 200
+        # monitor 模块
+        - id: dolphin-monitor-biz
+          uri: lb://dolphin-monitor-biz
+          predicates:
+            - Path=/monitor_proxy/**
+        # common 模块
+        - id: dolphin-common-biz
+          uri: lb://dolphin-common-biz
+          predicates:
+            - Path=/common_proxy/**
+
+gateway:
+  # ASE对称加密密钥
+  encode-key: 'dolphin-platform'
+  # 忽略不需要校验验证码是否合法的客户端
+  ignore-clients:
+    - test
+    - dolphin_lock
+
+swagger:
+  # 忽略微服务提供者
+  ignore-providers:
+    - dolphin-auth

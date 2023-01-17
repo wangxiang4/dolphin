@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.cloud.dolphin.common.rocketmq.config.RocketMQConfiguration

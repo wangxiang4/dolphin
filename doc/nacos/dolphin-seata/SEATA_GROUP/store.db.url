@@ -1,0 +1,1 @@
+jdbc:mysql://xxx.xxx.xxx.xxx:8052/dolphin_seata?useUnicode=true&rewriteBatchedStatements=true

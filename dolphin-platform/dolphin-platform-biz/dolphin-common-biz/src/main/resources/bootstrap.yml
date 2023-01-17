@@ -1,0 +1,17 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST:dolphin-register}:${NACOS_PORT:8848}
+        namespace: @profiles.namespace@
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+        namespace: @profiles.namespace@
+        shared-configs:
+          - application.${spring.cloud.nacos.config.file-extension}

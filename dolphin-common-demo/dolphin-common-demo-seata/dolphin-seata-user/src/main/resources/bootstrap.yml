@@ -1,0 +1,71 @@
+server:
+  port: 60003
+
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST:xxx.xxx.xxx.xxx}:${NACOS_PORT:8848}
+        namespace: ${seata.registry.nacos.namespace}
+        group: ${seata.registry.nacos.group}
+    sentinel:
+      filter:
+        # 关闭内部拦截,与spring cloud 2021有不兼容的问题
+        enabled: false
+  datasource:
+    # 数据源采用spring-boot自带kari,轻量化
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PWD:root}
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DB:dolphin}?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+
+# feign配置
+feign:
+  # 开启对sentinel的支持能提供接口调用自动熔断降级的功能
+  sentinel:
+    enabled: true
+  # 开启okhttp
+  okhttp:
+    enabled: true
+  # 关闭feign默认使用的jdk中的HttpURLConnection请求性能太低,集成别的组件来替换掉
+  httpclient:
+    enabled: false
+  client:
+    config:
+      default:
+        # 连接超时时间
+        connectTimeout: 10000
+        # 读超时时间
+        readTimeout: 10000
+  compression:
+    # 开启请求 GZIP 压缩,加快传输速度
+    request:
+      enabled: true
+    # 开启响应 GZIP 压缩,加快传输速度
+    response:
+      enabled: true
+
+# mybatis-plus配置
+mybatis-plus:
+  mapper-locations:
+    - classpath:mapper/**/*.xml
+  typeAliasesPackage: com.cloud.dolphin.**.entity
+  global-config:
+    # 不显示banner
+    banner: false
+    # 数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: assign_id
+  configuration:
+    call-setters-on-nulls: true
+
+# 日志配置
+logging:
+  level:
+    com.cloud.dolphin: debug
+    org.springframework: WARN
+    org.spring.springboot.dao: debug

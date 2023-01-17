@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.cloud</groupId>
+		<artifactId>dolphin-platform-api</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<artifactId>dolphin-system-api</artifactId>
+	<packaging>jar</packaging>
+
+	<description>dolphin 系统api模块</description>
+
+	<dependencies>
+		<!--断路器依赖-->
+		<dependency>
+			<groupId>com.cloud</groupId>
+			<artifactId>dolphin-common-feign</artifactId>
+		</dependency>
+		<!--数据服务核心包-->
+		<dependency>
+			<groupId>com.cloud</groupId>
+			<artifactId>dolphin-common-data</artifactId>
+		</dependency>
+		<!--excel 导入导出-->
+		<dependency>
+			<groupId>com.pig4cloud.excel</groupId>
+			<artifactId>excel-spring-boot-starter</artifactId>
+		</dependency>
+	</dependencies>
+</project>

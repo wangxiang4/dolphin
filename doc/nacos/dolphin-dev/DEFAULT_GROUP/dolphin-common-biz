@@ -1,0 +1,19 @@
+security:
+  # 目前资源服务器远程校验令牌RemoteTokenServices类未实现,目前支持本地校验,正在考虑换授权框架sa-token
+  oauth2:
+    client:
+      # 配置资源服务器去认证服务器token-info-uri认证所需的客户端ID跟客户端密钥
+      client-id: ENC(dtjFNJ20ocy3dpBwUqSbfA==)
+      client-secret: ENC(dtjFNJ20ocy3dpBwUqSbfA==)
+      scope: server
+      
+spring:
+  datasource:
+    hikari:
+      max-lifetime: 120000
+    # 数据源采用spring-boot自带kari,轻量化
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PWD:root}
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DB:dolphin}?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true

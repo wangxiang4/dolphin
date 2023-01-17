@@ -1,0 +1,9 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.cloud.dolphin.common.security.aspect.SecurityInnerAspect,\
+  com.cloud.dolphin.common.security.service.impl.DolphinUserDetailsServiceImpl,\
+  com.cloud.dolphin.common.security.service.impl.DolphinAppUserDetailsServiceImpl,\
+  com.cloud.dolphin.common.security.config.TokenStoreAutoConfiguration,\
+  com.cloud.dolphin.common.security.config.TokenStoreAutoCleanScheduleConfiguration,\
+  com.cloud.dolphin.common.security.config.SecurityMessageSourceConfiguration,\
+  com.cloud.dolphin.common.security.xss.XssFilterAutoConfiguration
+

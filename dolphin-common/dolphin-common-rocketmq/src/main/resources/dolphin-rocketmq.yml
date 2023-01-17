@@ -1,0 +1,61 @@
+spring:
+  # 参考信息,后期可以阅读源码类添加新的配置信息:https://www.jianshu.com/p/7f8fd90564ca
+  cloud:
+    # spring-cloud-stream配置项,对应BindingServiceProperties类
+    stream:
+      # Binding配置项,对应 BindingProperties Map
+      bindings:
+        # 生产通道配置----------------------------------------------
+        sms-output:
+          # 主题通道,这里使用RocketMQ Topic
+          destination: sms-topic
+          # 内容格式,这里使用JSON
+          content-type: application/json
+        order-output:
+          # 主题通道,这里使用RocketMQ Topic
+          destination: order-topic
+          # 内容格式,这里使用JSON
+          content-type: application/json
+        # 消费通道配置----------------------------------------------
+        sms-input:
+          # 主题通道,这里使用RocketMQ Topic
+          destination: sms-topic
+          # 内容格式,这里使用JSON
+          content-type: text/plain
+          # 消费组(ps:如果管道没有指定消费组,那么这个匿名消费组会与其它组一起消费消息,会出现了重复消费的问题）
+          group: sms-group
+        order-input:
+          # 主题通道,这里使用RocketMQ Topic
+          destination: order-topic
+          # 内容格式,这里使用JSON
+          content-type: text/plain
+          # 消费组(ps:如果管道没有指定消费组,那么这个匿名消费组会与其它组一起消费消息,会出现了重复消费的问题）
+          group: order-group
+      # spring-cloud-stream-rocketmq配置项
+      rocketmq:
+        # rocketmq自定义binding配置项,对应RocketMQBindingProperties Map
+        bindings:
+          # 生产通道绑定配置----------------------------------------------
+          sms-output:
+            # RocketMQ-Producer配置项,对应RocketMQProducerProperties类
+            producer:
+              # 生产者分组
+              group: sms-binder-group
+              # 是否同步发送消息,默认为false异步
+              sync: true
+          order-output:
+            producer:
+              # 生产者分组
+              group: order-binder-group
+              # 是否开启分布式事务
+              transactional: true
+          # 消费通道绑定配置----------------------------------------------
+          sms-input:
+            # RocketMQ-Consumer配置项,对应RocketMQConsumerProperties类
+            consumer:
+              # 消息顺序消费
+              orderly: true
+          order-input:
+            consumer:
+              # 消息顺序消费
+              orderly: true

@@ -1,0 +1,32 @@
+# PROJECT: dolphin
+# VERSION: 1.0.0
+# Author: wangxiang4
+
+# 更多信息请参考官网:https://docs.gitea.io/en-us/install-with-docker/
+version: "3"
+services:
+
+  # git私有库,代码管理服务器
+  gitea-server:
+    image: gitea/gitea:1.16.3
+    container_name: gitea-server
+    environment:
+      - GITEA__database__DB_TYPE=mysql
+      - GITEA__database__HOST= xxx.xxx.xxx.xxx:8052
+      - GITEA__database__NAME=gitea
+      - GITEA__database__USER=root
+      - GITEA__database__PASSWD= ******
+    hostname: gitea-server
+    restart: always
+    volumes:
+      - gitea:/data
+      - /usr/software/dockerDatabase/gitea/timezone:/etc/timezone:ro
+      - /usr/software/dockerDatabase/gitea/localtime:/etc/localtime:ro
+    ports:
+      - 8066:3000
+      - 8065:22
+
+# 配置卷
+volumes:
+  gitea:
+    driver: local

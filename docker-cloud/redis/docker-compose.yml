@@ -1,0 +1,25 @@
+# PROJECT: dolphin
+# VERSION: 1.0.0
+# Author: wangxiang4
+
+# https://support.websoft9.com/docs/docker/zh/solution-compose.html#command
+version: '3'
+services:
+
+  # redis服务器
+  redis:
+    image: redis:6.2.6
+    container_name: redis
+    hostname: redis
+    restart: always
+    ports:
+      - 6379:6379
+    command: redis-server --requirepass ******
+    volumes:
+      - redis:/data
+      - /usr/software/dockerDatabase/redis/redis.conf:/usr/local/etc/redis/redis.conf
+
+# 配置卷
+volumes:
+  redis:
+    driver: local

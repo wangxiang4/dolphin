@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.cloud</groupId>
+		<artifactId>dolphin</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<artifactId>dolphin-common</artifactId>
+	<packaging>pom</packaging>
+
+	<description>dolphin 公共聚合模块</description>
+
+	<modules>
+		<module>dolphin-common-bom</module>
+		<module>dolphin-common-core</module>
+		<module>dolphin-common-log</module>
+		<module>dolphin-common-datasource</module>
+		<module>dolphin-common-data</module>
+		<module>dolphin-common-security</module>
+		<module>dolphin-common-feign</module>
+		<module>dolphin-common-swagger</module>
+		<module>dolphin-common-mock</module>
+		<module>dolphin-common-job</module>
+		<module>dolphin-common-rocketmq</module>
+		<module>dolphin-common-seata</module>
+    </modules>
+</project>

@@ -1,0 +1,6 @@
+spring:
+  # 安全配置
+  security:
+    user:
+      name: ENC(dtjFNJ20ocy3dpBwUqSbfA==)     # dolphin
+      password: ENC(dtjFNJ20ocy3dpBwUqSbfA==) # dolphin

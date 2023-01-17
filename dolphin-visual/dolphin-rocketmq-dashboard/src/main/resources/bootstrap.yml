@@ -1,0 +1,26 @@
+server:
+  port: 8058
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+## SSL setting
+#  ssl:
+#    key-store: classpath:rmqcngkeystore.jks
+#    key-store-password: rocketmq
+#    key-store-type: PKCS12
+#    key-alias: rmqcngkey
+
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST:dolphin-register}:${NACOS_PORT:8848}
+        namespace: @profiles.namespace@
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+        namespace: @profiles.namespace@

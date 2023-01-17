@@ -1,0 +1,15 @@
+FROM moxm/java:1.8-full
+
+RUN mkdir -p /dolphin-rocketmq-dashboard
+
+WORKDIR /dolphin-rocketmq-dashboard
+
+ARG JAR_FILE=target/dolphin-rocketmq-dashboard.jar
+
+COPY ${JAR_FILE} app.jar
+
+EXPOSE 8058
+
+ENV TZ=Asia/Shanghai JAVA_OPTS="-Xms128m -Xmx256m -Djava.security.egd=file:/dev/./urandom"
+
+CMD sleep 60; java -jar app.jar $JAVA_OPTS

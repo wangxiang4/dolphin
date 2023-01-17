@@ -1,0 +1,58 @@
+# spring-boot-admin配置
+management:
+  health:
+    # 关闭邮件健康检查
+    mail:
+      enabled: false
+  endpoints:
+    web:
+      # 暴露所有监控点(监控请求url地址)配置
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      # 何时显示完整的健康信息,默认为NEVER都不显示,WHEN_AUTHORIZED当经过授权的用户显示,ALWAYS总是展示
+      show-details: ALWAYS
+
+xxl:
+  job:
+    i18n: zh_CN
+    # 日志保留天数
+    logretentiondays: 30
+    # 调度线程池最大线程配置
+    triggerpool:
+      # 配置快任务线程池最大200
+      fast.max: 200
+      # 1分钟窗口期内任务耗时达500ms超过10次,该窗口期内断定为慢任务,慢任务自动降级进入 Slow 线程池,避免耗尽调度线程,提升系统稳定性,配置最大200
+      slow.max: 200
+
+mybatis:
+  mapper-locations: classpath:/mybatis-mapper/*Mapper.xml
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DB:dolphin_job}?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PWD:root}
+  mvc:
+    static-path-pattern: /static/**
+  freemarker:
+    suffix: .ftl
+    request-context-attribute: request
+    settings:
+      number_format: 0.##########
+  # xxl-job报警邮箱
+  mail:
+    host: smtp.qq.com
+    port: 465
+    from: 1827945911@qq.com
+    username: 1827945911@qq.com
+    password: xxxx
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl.enable: true
+          starttls.enable: false
+          required: false

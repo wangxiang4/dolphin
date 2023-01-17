@@ -1,0 +1,35 @@
+# PROJECT: dolphin
+# VERSION: 1.0.0
+# Author: wangxiang4
+
+# https://support.websoft9.com/docs/docker/zh/solution-compose.html#command
+version: "3"
+services:
+
+  # seata分布式事务服务器
+  seata-server:
+    image: seataio/seata-server:1.4.2
+    container_name: seata-server
+    hostname: seata-server
+    restart: always
+    networks:
+      - seata-server
+    ports:
+      - 8091:8091
+    environment:
+      # https://seata.io/zh-cn/docs/ops/deploy-by-docker.html
+      # 注册到nacos上的ip。客户端将通过该ip访问seata服务。
+      # 注意公网ip和内网ip的差异。
+      - SEATA_IP=xxx.xxx.xxx.xxx
+      # 指定seata服务启动端口
+      - SEATA_PORT=8091
+      # 存储模式
+      - STORE_MODE=db
+    volumes:
+      - /usr/software/dockerDatabase/seata/config/registry.conf:/seata-server/resources/registry.conf
+      - /usr/software/dockerDatabase/seata/logs:/root/logs/seata
+
+# 局域网网关配置
+networks:
+  seata-server:
+    driver: bridge

@@ -1,0 +1,14 @@
+server:
+  port: 40002
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    stream:
+      rocketmq:
+        # rocketmq-binder配置项,对应RocketMQBinderConfigurationProperties类
+        binder:
+          name-server: xxx.xxx.xxx.xxx:9876
+          # 也可以配置密码,可以设置开启acl,目前只是在内网使用没开,后期有这方面需求在开启
+          # access-key:
+          # secret-key:

@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.cloud.dolphin.common.feign.DolphinFeignAutoConfiguration,\
+    com.cloud.dolphin.common.feign.sentinel.SentinelAutoConfiguration,\
+    com.cloud.dolphin.common.feign.sentinel.handle.GlobalBizExceptionHandler

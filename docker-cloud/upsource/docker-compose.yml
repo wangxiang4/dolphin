@@ -1,0 +1,21 @@
+# PROJECT: dolphin
+# VERSION: 1.0.0
+# Author: wangxiang4
+
+# 更多信息请参考官网:https://docs.gitea.io/en-us/install-with-docker/
+version: '3'
+services:
+  #idea代码审查工具
+  #docker安装帮助: https://www.jetbrains.com/help/upsource/docker-installation.html#configure
+  upsource-server:
+    image: jetbrains/upsource:2020.1.1992
+    container_name: upsource
+    hostname: upsource
+    restart: always
+    volumes:
+      - /usr/software/dockerDatabase/upsource/data:/opt/upsource/data
+      - /usr/software/dockerDatabase/upsource/conf:/opt/upsource/conf
+      - /usr/software/dockerDatabase/upsource/logs:/opt/upsource/logs
+      - /usr/software/dockerDatabase/upsource/backups:/opt/upsource/backups
+    ports:
+      - 9301:8080

@@ -1,0 +1,40 @@
+server:
+  port: 60001
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST:101.42.231.100}:${NACOS_PORT:8848}
+        namespace: ${seata.registry.nacos.namespace}
+        group: ${seata.registry.nacos.group}
+  datasource:
+    # 数据源采用spring-boot自带kari,轻量化
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PWD:root}
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DB:dolphin}?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+
+# mybatis-plus配置
+mybatis-plus:
+  mapper-locations:
+    - classpath:mapper/**/*.xml
+  typeAliasesPackage: com.cloud.dolphin.**.entity
+  global-config:
+    # 不显示banner
+    banner: false
+    # 数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: assign_id
+  configuration:
+    call-setters-on-nulls: true
+
+# 日志配置
+logging:
+  level:
+    com.cloud.dolphin: debug
+    org.springframework: WARN
+    org.spring.springboot.dao: debug

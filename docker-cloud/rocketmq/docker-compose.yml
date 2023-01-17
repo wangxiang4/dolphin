@@ -1,0 +1,51 @@
+# PROJECT: dolphin
+# VERSION: 1.0.0
+# Author: wangxiang4
+
+# rocketmq参考:https://rocketmq.apache.org/docs/%E4%BB%8B%E7%BB%8D/03whatis
+# https://support.websoft9.com/docs/docker/zh/solution-compose.html#command
+version: '3'
+services:
+  # rocketmq代理发现注册服务
+  rmqnamesrv:
+    image: foxiswho/rocketmq:server
+    container_name: rmqnamesrv
+    restart: always
+    ports:
+      - 9876:9876
+    volumes:
+      - /usr/software/dockerDatabase/rocketmq/namesrv/logs:/opt/logs
+      - /usr/software/dockerDatabase/rocketmq/namesrv/store:/opt/store
+    networks:
+      rmq:
+        aliases:
+          - rmqnamesrv
+
+  # rocketmq核心消息发送存储代理
+  rmqbroker:
+    image: foxiswho/rocketmq:broker
+    container_name: rmqbroker
+    restart: always
+    ports:
+      - 10909:10909
+      - 10911:10911
+    volumes:
+      - /usr/software/dockerDatabase/rocketmq/namesrv/logs:/opt/logs
+      - /usr/software/dockerDatabase/rocketmq/namesrv/store:/opt/store
+      - /usr/software/dockerDatabase/rocketmq/broker/brokerconf/broker.conf:/etc/rocketmq/broker.conf
+    environment:
+      NAMESRV_ADDR: "rmqnamesrv:9876"
+      JAVA_OPTS: "-Duser.home=/opt"
+      JAVA_OPT_EXT: "-server -Xms128m -Xmx128m -Xmn128m"
+    command: mqbroker -c /etc/rocketmq/broker.conf
+    depends_on:
+      - rmqnamesrv
+    networks:
+      rmq:
+        aliases:
+          - rmqbroker
+
+# 局域网网关配置
+networks:
+  rmq:
+    driver: bridge

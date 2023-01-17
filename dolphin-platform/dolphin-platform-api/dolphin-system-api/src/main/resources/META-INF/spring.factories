@@ -1,0 +1,3 @@
+com.cloud.dolphin.common.feign.DolphinFeignAutoConfiguration=\
+    com.cloud.dolphin.system.api.feign.RemoteDictService,\
+    com.cloud.dolphin.system.api.feign.RemoteUserService

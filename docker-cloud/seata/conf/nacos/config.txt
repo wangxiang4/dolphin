@@ -1,0 +1,134 @@
+# PROJECT: dolphin
+# VERSION: 1.0.0
+# Author: wangxiang4
+# 有关配置项的详细信息,请参考:https://seata.io/zh-cn/docs/user/configurations.html
+
+# 客户端与服务端传输方式
+transport.type=TCP
+transport.server=NIO
+transport.heartbeat=true
+transport.enableTmClientBatchSendRequest=false
+transport.enableRmClientBatchSendRequest=true
+transport.enableTcServerBatchSendResponse=false
+transport.rpcRmRequestTimeout=30000
+transport.rpcTmRequestTimeout=30000
+transport.rpcTcRequestTimeout=30000
+transport.threadFactory.bossThreadPrefix=NettyBoss
+transport.threadFactory.workerThreadPrefix=NettyServerNIOWorker
+transport.threadFactory.serverExecutorThreadPrefix=NettyServerBizHandler
+transport.threadFactory.shareBossWorker=false
+transport.threadFactory.clientSelectorThreadPrefix=NettyClientSelector
+transport.threadFactory.clientSelectorThreadSize=1
+transport.threadFactory.clientWorkerThreadPrefix=NettyClientWorkerThread
+transport.threadFactory.bossThreadSize=1
+transport.threadFactory.workerThreadSize=default
+transport.shutdown.wait=3
+transport.serialization=seata
+transport.compressor=none
+
+# 事务路由规则配置,仅针对客户端
+# seata事务组编号,用于TC集群名,很重要,与项目配置文件的tx-service-group对应
+service.vgroupMapping.default_tx_group=default
+# 默认的群组集群list,仅注册中心为file时使用,使用nacos注册中心不需要写了:https://github.com/seata/seata/issues/3473
+service.default.grouplist=127.0.0.1:8091
+service.enableDegrade=false
+service.disableGlobalTransaction=false
+
+# 事务规则配置,仅针对客户端
+client.rm.asyncCommitBufferLimit=10000
+client.rm.lock.retryInterval=10
+client.rm.lock.retryTimes=30
+client.rm.lock.retryPolicyBranchRollbackOnConflict=true
+client.rm.reportRetryCount=5
+client.rm.tableMetaCheckEnable=false
+client.rm.tableMetaCheckerInterval=60000
+client.rm.sqlParserType=druid
+client.rm.reportSuccessEnable=false
+client.rm.sagaBranchRegisterEnable=false
+client.rm.sagaJsonParser=fastjson
+client.rm.tccActionInterceptorOrder=-2147482648
+client.tm.commitRetryCount=5
+client.tm.rollbackRetryCount=5
+client.tm.defaultGlobalTransactionTimeout=60000
+client.tm.degradeCheck=false
+client.tm.degradeCheckAllowTimes=10
+client.tm.degradeCheckPeriod=2000
+client.tm.interceptorOrder=-2147482648
+client.undo.dataValidation=true
+client.undo.logSerialization=jackson
+client.undo.onlyCareUpdateColumns=true
+server.undo.logSaveDays=7
+server.undo.logDeletePeriod=86400000
+client.undo.logTable=undo_log
+client.undo.compress.enable=true
+client.undo.compress.type=zip
+client.undo.compress.threshold=64k
+# 针对于TCC交易模式
+tcc.fence.logTableName=tcc_fence_log
+tcc.fence.cleanPeriod=1h
+
+# 日志规则配置,用于客户端和服务器
+log.exceptionRate=100
+
+# 事务存储配置,file,db,redis为可选配置,推荐db模式
+store.mode=db
+store.lock.mode=file
+store.session.mode=file
+# 用于密码加密
+# store.publicKey=
+
+# 如果store.mode,store.lock.mode,store.session.mode不等于file可以移除配置块
+store.file.dir=file_store/data
+store.file.maxBranchSessionSize=16384
+store.file.maxGlobalSessionSize=512
+store.file.fileWriteBufferCacheSize=16384
+store.file.flushDiskMode=async
+store.file.sessionReloadReadSize=100
+
+# 如果store.mode为db则需要这些配置,如果store.mode,store.lock.mode,store.session.mode不等于db可以移除配置块
+store.db.datasource=druid
+# 如果为DB模式需要配置数据库,数据库默认数据库为mysql
+store.db.dbType=mysql
+store.db.driverClassName=com.mysql.jdbc.Driver
+store.db.url=jdbc:mysql://xxx.xxx.xxx.xxx:8052/dolphin_seata?useUnicode=true&rewriteBatchedStatements=true
+store.db.user=root
+store.db.password=root
+store.db.minConn=5
+store.db.maxConn=30
+store.db.globalTable=global_table
+store.db.branchTable=branch_table
+store.db.distributedLockTable=distributed_lock
+store.db.queryLimit=100
+store.db.lockTable=lock_table
+store.db.maxWait=5000
+
+# 如果store.mode为redis则需要这些配置,如果store.mode,store.lock.mode,store.session.mode不等于redis可以移除配置块
+store.redis.mode=single
+store.redis.single.host=127.0.0.1
+store.redis.single.port=6379
+# store.redis.sentinel.masterName=
+# store.redis.sentinel.sentinelHosts=
+store.redis.maxConn=10
+store.redis.minConn=1
+store.redis.maxTotal=100
+store.redis.database=0
+# store.redis.password=
+store.redis.queryLimit=100
+
+# 交易规则配置,只针对服务端
+server.recovery.committingRetryPeriod=1000
+server.recovery.asynCommittingRetryPeriod=1000
+server.recovery.rollbackingRetryPeriod=1000
+server.recovery.timeoutRetryPeriod=1000
+server.maxCommitRetryTimeout=-1
+server.maxRollbackRetryTimeout=-1
+server.rollbackRetryTimeoutUnlockEnable=false
+server.distributedLockExpireTime=10000
+server.session.branchAsyncQueueSize=5000
+server.session.enableBranchAsyncRemove=true
+
+# 关闭metrics统计信息功能,提高性能:https://developer.aliyun.com/article/710333
+metrics.enabled=false
+metrics.registryType=compact
+metrics.exporterList=prometheus
+metrics.exporterPrometheusPort=9898

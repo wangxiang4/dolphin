@@ -1,0 +1,3 @@
+com.cloud.dolphin.common.feign.DolphinFeignAutoConfiguration=\
+    com.cloud.dolphin.monitor.api.feign.RemoteLogService,\
+    com.cloud.dolphin.monitor.api.feign.RemoteTokenService

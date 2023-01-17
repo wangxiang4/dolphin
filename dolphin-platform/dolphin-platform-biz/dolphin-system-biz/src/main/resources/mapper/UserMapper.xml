@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.dolphin.system.mapper.UserMapper">
+
+    <resultMap type="com.cloud.dolphin.system.api.entity.User" id="UserResult">
+        <result property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="phone" column="phone"/>
+        <result property="sex" column="sex"/>
+        <result property="avatar" column="avatar"/>
+        <result property="email" column="email"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="loginIp" column="login_ip"/>
+        <result property="loginTime" column="login_time"/>
+        <result property="status" column="status"/>
+        <result property="createById" column="create_by_id"/>
+        <result property="createByName" column="create_by_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateById" column="update_by_id"/>
+        <result property="updateByName" column="update_by_name"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remarks" column="remarks"/>
+        <result property="delFlag" column="del_flag"/>
+    </resultMap>
+
+    <select id="selectUseByDept" resultMap="UserResult">
+        SELECT a.* FROM sys_user a
+        LEFT JOIN sys_user_role ur1 ON ur1.user_id = a.user_id
+        LEFT JOIN sys_role_dept rd1 ON rd1.role_id = ur1.role_id
+        <where>
+            a.del_flag = 0 AND status = 0
+            <if test="deptName != null and deptName != ''">
+                AND rd1.dept_name = #{deptName}
+            </if>
+            <if test="deptType != null and deptType != ''">
+                AND rd1.dept_type = #{deptType}
+            </if>
+        </where>
+        limit 1
+    </select>
+
+</mapper>

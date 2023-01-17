@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.dolphin.system.mapper.RoleMapper">
+
+    <resultMap type="Role" id="RoleResult">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="code" column="code"/>
+        <result property="sort" column="sort"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="createById" column="create_by_id"/>
+        <result property="createByName" column="create_by_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateById" column="update_by_id"/>
+        <result property="updateByName" column="update_by_name"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remarks" column="remarks"/>
+    </resultMap>
+
+    <select id="selectRolesByUserId" parameterType="String" resultMap="RoleResult">
+        select distinct r.id, r.name, r.code, r.sort, r.del_flag, r.create_time, r.remarks
+        from sys_role r
+	        left join sys_user_role ur on ur.role_id = r.id
+	        left join sys_user u on u.id = ur.user_id
+	        left join sys_dept d on u.dept_id = d.dept_id
+        WHERE r.del_flag = '0' and ur.user_id = #{userId}
+    </select>
+</mapper>

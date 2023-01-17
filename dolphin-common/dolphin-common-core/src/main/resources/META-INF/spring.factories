@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.cloud.dolphin.common.core.config.WebMvcConfiguration,\
+  com.cloud.dolphin.common.core.config.RestTemplateConfiguration,\
+  com.cloud.dolphin.common.core.util.SpringContextHolderUtil

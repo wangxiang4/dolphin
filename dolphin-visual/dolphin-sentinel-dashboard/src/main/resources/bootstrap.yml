@@ -1,0 +1,18 @@
+server:
+  port: 8056
+  servlet:
+    encoding:
+      force: true
+
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST:dolphin-register}:${NACOS_PORT:8848}
+        namespace: @profiles.namespace@
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+        namespace: @profiles.namespace@
