@@ -12,7 +12,7 @@
     <artifactId>dolphin-message-producer</artifactId>
     <packaging>jar</packaging>
 
-    <description>mq消息提供者</description>
+    <description>rocketmq消息中间件演示-mq消息提供者</description>
 
     <dependencies>
         <!--undertow容器-->

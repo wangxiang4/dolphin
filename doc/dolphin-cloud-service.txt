@@ -1,30 +1,35 @@
 注意所有打包部署全部写了docker-compose一键部署,需要了解更多信息,请参考dolphin项目中docker-cloud文件夹
 宿主机文件统一映射路径:/usr/software/dockerDatabase/**
 
---------海豚微服务生态平台端口目录--------
-8051:prtainer-ce: docker可视化面板
-8052:mysql
-8053:redis
-9876:rocketmq:namesrv
-10909:rocketmq:broker:远程发送消息接口
-10911:rocketmq:broker:远程快速发送消息接口
-8091:seata-server
-8848:dolphin-register:连接端口
-9848:dolphin-register:客户端向服务端发起连接和请求
-9849:dolphin-register:用于服务间同步等
-8058:dolphin-rocketmq
-8056:dolphin-sentinel
-8057:dolphin-job-admin
-8061:dolphin-monitor
-9999:dolphin-gateway
-3000:dolphin-auth
-4000:dolphin-system
-80:dolphin-ui
-40003:demo-dolphin-message-consumer
-40002:demo-dolphin-message-producer
-60001:demo-dolphin-seata-order
-60002:demo-dolphin-seata-point
-60003:demo-dolphin-seata-user
-8062:docker
-8065:gitea ssh端口服务
-8066:gitea http端口服务
+--------海豚微服务生态平台端口目录(包含工具)--------
+8051:prtainer-ce -> docker可视化面板
+8052:mysql -> 关系数据库
+6379:redis -> 非关系型数据库
+8066:gitea-https -> 代码私有仓库https
+8065:gitea-ssh -> 代码私有仓库ssh
+9300:jira -> 项目生命周期管理
+9876:rocketmq:namesrv -> 代理发现注册服务,跟nacos类似
+10909:rocketmq:broker -> 远程发送消息接口
+10911:rocketmq:broker -> 远程快速发送消息接口
+8091:seata-server -> 分布式事务TC服务
+9301:upsource-server -> idea代码审查服务
+8848:dolphin-register -> nacos服务连接
+9848:dolphin-register -> 客户端向服务端发起连接和请求
+9849:dolphin-register -> 用于服务间同步等
+9999:dolphin-gateway -> spring网关服务
+3000:dolphin-auth -> 安全认证服务
+4000:dolphin-system -> 系统模块服务
+8000:dolphin-common -> 通用业务模块服务
+6000:dolphin-monitor -> 运维监控模块服务
+8058:dolphin-visual-rocketmq -> rocketmq可视化监控平台
+8056:sentinel-visual-dashboard -> 哨兵流量控制可视化平台
+8057:dolphin-visual-job -> xxl-job可视化监控平台
+8061:dolphin-visual-monitor -> SpringBoot可视化监控平台
+80:dolphin-admin -> vue3前端生态平台
+8062:docker -> docker服务
+40003:demo-dolphin-message-consumer -> rocketmq消息中间件演示-mq消息消费者
+40002:demo-dolphin-message-producer -> rocketmq消息中间件演示-mq消息提供者
+60001:demo-dolphin-seata-order -> 分布式解决方案演示-订单服务
+60002:demo-dolphin-seata-point -> 分布式解决方案演示-积分服务
+60003:demo-dolphin-seata-user -> 分布式解决方案演示-用户服务
+
