@@ -6,7 +6,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: ${NACOS_HOST:101.42.231.100}:${NACOS_PORT:8848}
+        server-addr: ${NACOS_HOST:xxx.xxx.xxx.xxx}:${NACOS_PORT:8848}
         namespace: ${seata.registry.nacos.namespace}
         group: ${seata.registry.nacos.group}
   datasource:
