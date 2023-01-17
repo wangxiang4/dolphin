@@ -11,7 +11,7 @@
 	<artifactId>dolphin-spring-dashboard</artifactId>
 	<packaging>jar</packaging>
 
-	<description>dolphin 监控模块，基于 spring boot admin</description>
+	<description>dolphin springboot监控模块，基于 spring boot admin</description>
 
 	<dependencies>
 		<!--监控服务端-->
