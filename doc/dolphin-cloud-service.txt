@@ -1,9 +1,8 @@
-注意所以打包部署全部写了docker-compose一键部署,需要了解更多信息,请参考dolphin项目中docker-cloud文件夹
+注意所有打包部署全部写了docker-compose一键部署,需要了解更多信息,请参考dolphin项目中docker-cloud文件夹
 宿主机文件统一映射路径:/usr/software/dockerDatabase/**
 
-
-微服务端口:------------------------------------------
-8051:prtainer-ce
+--------海豚微服务生态平台端口目录--------
+8051:prtainer-ce: docker可视化面板
 8052:mysql
 8053:redis
 9876:rocketmq:namesrv
