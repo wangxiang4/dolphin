@@ -12,9 +12,6 @@
 </p>
 
 <div align="center">
-  <a href="https://github.com/wangxiang4/dolphin/actions">
-    <img src="https://github.com/wangxiang4/dolphin-ecology-docs/workflows/Deploy%20Docs/badge.svg">
-  </a>
   <a href="https://godolphinx.org">
     <img src="https://img.shields.io/npm/l/vue.svg?sanitize=true">
   </a>
