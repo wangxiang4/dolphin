@@ -75,9 +75,11 @@ public class MenuController {
     @PostMapping("/save")
     @PreAuthorize("@pms.hasPermission('menu_add')")
     public R save(@RequestBody Menu menu) {
-        roleMenuService.update(Wrappers.<RoleMenu>lambdaUpdate()
-                .in(RoleMenu::getMenuId, menu.getParentIds())
-                .set(RoleMenu::getCheckeType, "2"));
+        if (ArrayUtil.isNotEmpty(menu.getParentIds())) {
+            roleMenuService.update(Wrappers.<RoleMenu>lambdaUpdate()
+                    .in(RoleMenu::getMenuId, menu.getParentIds())
+                    .set(RoleMenu::getCheckeType, "2"));
+        }
         menuService.save(menu);
         return R.ok();
     }
