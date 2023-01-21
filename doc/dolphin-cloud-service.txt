@@ -24,7 +24,7 @@
 8058:dolphin-visual-rocketmq -> rocketmq可视化监控平台
 8056:sentinel-visual-dashboard -> 哨兵流量控制可视化平台
 8057:dolphin-visual-job -> xxl-job可视化监控平台
-8061:dolphin-visual-monitor -> SpringBoot可视化监控平台
+8061:dolphin-visual-spring -> SpringBoot可视化监控平台
 80:dolphin-admin -> vue3前端生态平台
 8062:docker -> docker服务
 40003:demo-dolphin-message-consumer -> rocketmq消息中间件演示-mq消息消费者
