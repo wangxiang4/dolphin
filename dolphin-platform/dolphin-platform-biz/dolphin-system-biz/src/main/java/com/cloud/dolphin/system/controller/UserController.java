@@ -12,10 +12,7 @@ import com.cloud.dolphin.common.core.exception.CheckedException;
 import com.cloud.dolphin.common.log.annotation.SysLog;
 import com.cloud.dolphin.common.security.annotation.Inner;
 import com.cloud.dolphin.common.security.util.SecurityUtils;
-import com.cloud.dolphin.system.api.entity.Menu;
-import com.cloud.dolphin.system.api.entity.Role;
-import com.cloud.dolphin.system.api.entity.User;
-import com.cloud.dolphin.system.api.entity.UserRole;
+import com.cloud.dolphin.system.api.entity.*;
 import com.cloud.dolphin.system.api.vo.ResultVo;
 import com.cloud.dolphin.system.service.*;
 import com.pig4cloud.plugin.excel.annotation.ResponseExcel;
@@ -147,8 +144,8 @@ public class UserController {
     @SysLog("用户头像修改")
     @PutMapping("/updateAvatar")
     @PreAuthorize("@pms.hasPermission('user_edit')")
-    public Map updateAvatar(@RequestParam("avatarFile") MultipartFile file) {
-        return fileService.uploadFile(file);
+    public File updateAvatar(@RequestParam("avatarFile") MultipartFile file) {
+        return fileService.uploadFile(file, null);
     }
 
     @SysLog("用户密码修改")

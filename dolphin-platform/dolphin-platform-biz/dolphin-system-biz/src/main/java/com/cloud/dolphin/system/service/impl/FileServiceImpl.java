@@ -1,5 +1,8 @@
 package com.cloud.dolphin.system.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.IdUtil;
@@ -16,13 +19,13 @@ import com.pig4cloud.plugin.oss.service.OssTemplate;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
+
 /**
  *<p>
  * 文件管理
@@ -40,20 +43,24 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
 	private final OssTemplate ossTemplate;
 
 	@Override
-	public Map uploadFile(MultipartFile file) {
+	public File uploadFile(MultipartFile file, File ossFile) {
 		String fileName = IdUtil.simpleUUID() + StrUtil.DOT + FileUtil.extName(file.getOriginalFilename());
-		Map<String, String> resultMap = new HashMap<>(4);
-		resultMap.put("bucketName", ossProperties.getBucketName());
-		resultMap.put("fileName", fileName);
-		resultMap.put("url", String.format("/system_proxy/system/file/getFile/%s/%s", ossProperties.getBucketName(), fileName));
+		File defaultOssFile = new File().setFileName(fileName)
+				.setBucketName(ossProperties.getBucketName())
+				.setOriginal(file.getOriginalFilename())
+				.setType(FileUtil.extName(file.getOriginalFilename()))
+				.setFileSize(file.getSize())
+				.setAvailablePath(String.format("/system_proxy/system/file/getFile/%s/%s", ossProperties.getBucketName(), fileName))
+				.setMimeType(file.getContentType());
+		if(ObjectUtil.isNotEmpty(ossFile)) BeanUtil.copyProperties(ossFile, defaultOssFile, CopyOptions.create().ignoreNullValue().ignoreError());
 		try {
 			ossTemplate.putObject(ossProperties.getBucketName(), fileName, file.getContentType(), file.getInputStream());
 			// 文件管理数据记录,收集管理追踪文件
-			fileLog(file, fileName);
+			this.save(defaultOssFile);
 		} catch (Exception e) {
 			throw new CheckedException("上传失败");
 		}
-		return resultMap;
+		return defaultOssFile;
 	}
 
 	@Override
@@ -75,20 +82,6 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
 			ossTemplate.removeObject(ossProperties.getBucketName(), file.getFileName());
 			this.removeById(id);
 		}
-	}
-
-	/**
-	 * 文件管理数据记录,收集管理追踪文件
-	 * @param file 上传文件格式
-	 * @param fileName 文件名
-	 */
-	private void fileLog(MultipartFile file, String fileName) {
-		this.save(new File()
-				.setFileName(fileName)
-				.setOriginal(file.getOriginalFilename())
-				.setFileSize(file.getSize())
-				.setType(FileUtil.extName(file.getOriginalFilename()))
-				.setBucketName(ossProperties.getBucketName()));
 	}
 
 }

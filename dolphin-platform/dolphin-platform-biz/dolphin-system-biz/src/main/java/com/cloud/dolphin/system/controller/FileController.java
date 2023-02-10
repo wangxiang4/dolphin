@@ -1,7 +1,9 @@
 package com.cloud.dolphin.system.controller;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -22,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
+import java.util.Optional;
 
 /**
  *<p>
@@ -53,8 +55,9 @@ public class FileController {
 	}
 
 	@PostMapping("/upload")
-	public Map upload(@RequestPart("file") MultipartFile file) {
-		return fileService.uploadFile(file);
+	public File upload(@RequestPart("file") MultipartFile file,
+					   @RequestParam(value = "ossFile", required=false) String ossFile) {
+		return fileService.uploadFile(file, Optional.ofNullable(ossFile).map(item -> JSONUtil.parseObj(ossFile).toBean(File.class)).orElse(null));
 	}
 
 	@Inner(false)

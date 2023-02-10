@@ -5,7 +5,6 @@ import com.cloud.dolphin.system.api.entity.File;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
 
 /**
  *<p>
@@ -20,9 +19,10 @@ public interface FileService extends IService<File> {
 	/**
 	 * 上传文件
 	 * @param file
+	 * @param ossFile 扩展字段
 	 * @return
 	 */
-	Map uploadFile(MultipartFile file);
+	File uploadFile(MultipartFile file, File ossFile);
 
 	/**
 	 * 读取文件

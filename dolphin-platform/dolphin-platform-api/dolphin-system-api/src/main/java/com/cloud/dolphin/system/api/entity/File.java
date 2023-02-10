@@ -54,4 +54,19 @@ public class File extends CommonEntity {
 	 */
 	private Long fileSize;
 
+	/**
+	 * 有效原始路径
+	 */
+	private String availablePath;
+
+	/**
+	 * 视频时长
+	 */
+	private Long duration;
+
+	/**
+	 * 媒体资源类型
+	 */
+	private String mimeType;
+
 }
