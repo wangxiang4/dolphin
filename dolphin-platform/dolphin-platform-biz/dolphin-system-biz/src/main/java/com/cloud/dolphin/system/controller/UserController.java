@@ -109,11 +109,19 @@ public class UserController {
         return R.ok(userService.getUserAuthority(user));
     }
 
-    @SysLog("用户修改")
+    @SysLog("用户修改管理用户角色表")
     @PutMapping("/update")
     @PreAuthorize("@pms.hasPermission('user_edit')")
     public R update(@RequestBody User user) {
         userService.saveUser(user);
+        return R.ok();
+    }
+
+    @SysLog("用户修改")
+    @PutMapping("/updateUser")
+    @PreAuthorize("@pms.hasPermission('user_edit')")
+    public R updateUser(@RequestBody User user) {
+        userService.updateById(user);
         return R.ok();
     }
 
