@@ -8,7 +8,9 @@ import com.cloud.dolphin.common.security.annotation.Inner;
 import com.cloud.dolphin.system.api.entity.Region;
 import com.cloud.dolphin.system.api.vo.ResultVo;
 import com.cloud.dolphin.system.service.RegionService;
+import com.cloud.dolphin.system.util.ObjectUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,15 +40,22 @@ public class RegionController {
                 .orderByAsc(Region::getSort);
     }
 
+    @ApiOperation("查询")
     @GetMapping("/list")
     public R list(Region region) {
         List<Region> result = regionService.list(getQueryWrapper(region));
         return R.ok(result, result.size());
     }
 
+    @ApiOperation("懒加载查询")
     @GetMapping("/lazyList")
-    public R lazyList(String parentId){
-        return R.ok(regionService.lazyList(parentId));
+    public R lazyList(Region region) throws IllegalAccessException {
+        String[] fields = {"name", "code", "beginTime", "endTime" };
+        List<Region> result;
+        if (ObjectUtil.isAnyFieldsNotNull(region, fields)) {
+            result = regionService.list(getQueryWrapper(region));
+        } else result = regionService.lazyList(region.getParentId());
+        return R.ok(result, result.size());
     }
 
     @Inner
