@@ -149,13 +149,6 @@ public class UserController {
         return R.ok();
     }
 
-    @SysLog("用户头像修改")
-    @PutMapping("/updateAvatar")
-    @PreAuthorize("@pms.hasPermission('user_edit')")
-    public File updateAvatar(@RequestParam("avatarFile") MultipartFile file) {
-        return fileService.uploadFile(file, null);
-    }
-
     @SysLog("用户密码修改")
     @PutMapping("/updatePwd")
     @PreAuthorize("@pms.hasPermission('user_edit')")
