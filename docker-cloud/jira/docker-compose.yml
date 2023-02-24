@@ -2,7 +2,6 @@
 # VERSION: 1.0.0
 # Author: wangxiang4
 
-# 更多信息请参考官网:https://docs.gitea.io/en-us/install-with-docker/
 version: "3"
 services:
 
