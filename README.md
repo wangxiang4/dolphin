@@ -33,16 +33,16 @@
 - 主体框架：采用最新的`Spring Cloud 2021.0.1`, `Spring Boot 2.6.4`, `Spring Cloud Alibaba 2021.1`版本进行系统设计。
 - 统一注册：支持`Nacos`作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能。
 - 统一认证：统一`Oauth2`认证协议，并支持自定义grant_type实现手机号码登录，第三方登录集成JustAuth实现微信、支付宝等多种登录模式。
-- 业务监控：利用`Spring Boot Admin`来监控各个独立Service的运行状态。
+- 业务监控：利用`Spring Boot Admin`来监控各个独立微服务运行状态。
 - 内部调用：集成了`Feign`与自定义内部注解，支持内部调用。
 - 业务熔断：采用`Sentinel`实现业务熔断处理，避免服务之间出现雪崩。
 - 在线文档：通过接入`Knife4j`，实现在线API文档的查看与调试。
-- 业务分离：采用前后端分离的框架设计，前端采用基于 `vben Admin` 的 `dolphin-admin`。
-- 多租户功能：集成`Mybatis Plus`,实现SAAS多租户。
+- 业务分离：采用前后端分离的框架设计，让前后端开发人员分别专注于自己的领领域互不干扰，提高了整个项目的开发速度。
+- 多租户功能：集成`Mybatis Plus`,自定义sql执行拦截器，实现SAAS多租户。
 - 消息中间件：采用`RocketMQ`,实现服务之间消息转发。
 - 分布式事物方案：采用`seata`,实现多个微服务分布式事物一致。
 - 分布式定时器：采用`XXL-JOB`,实现多个微服务分布式任务调度。
-- 网关：采用`Spring Gateway`,实现流量配置动态化，性能极高，解决跨域问题，支持，鉴权，限流，熔断，防火墙等等。
+- 微服务网关：采用`Spring Gateway`实现流量配置动态化、API管理和路由、负载均衡和容错、解决跨域问题、鉴权，限流，熔断，防火墙等等。
 
 ## <img width="28" style="vertical-align:middle" src="https://godolphinx.org/images/hacktoberfest-logo.svg"> 黑客节
 加入[Github HackToberFest](https://hacktoberfest.com/) 开始为此项目做出贡献.
