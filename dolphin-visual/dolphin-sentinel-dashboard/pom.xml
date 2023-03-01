@@ -61,7 +61,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>dolphin-sentinel-dashboard</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
