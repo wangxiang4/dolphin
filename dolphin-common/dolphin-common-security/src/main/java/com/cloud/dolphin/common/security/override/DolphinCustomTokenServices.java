@@ -58,10 +58,10 @@ public class DolphinCustomTokenServices implements AuthorizationServerTokenServi
 
 	@Override
 	public OAuth2AccessToken createAccessToken(OAuth2Authentication authentication) throws AuthenticationException {
-		OAuth2AccessToken existingAccessToken = tokenStore.getAccessToken(authentication);
+		//OAuth2AccessToken existingAccessToken = tokenStore.getAccessToken(authentication);
 		OAuth2RefreshToken refreshToken = null;
 
-		if (existingAccessToken != null) {
+		/*if (existingAccessToken != null) {
 			if (existingAccessToken.isExpired()) {
 				if (existingAccessToken.getRefreshToken() != null) {
 					refreshToken = existingAccessToken.getRefreshToken();
@@ -74,7 +74,7 @@ public class DolphinCustomTokenServices implements AuthorizationServerTokenServi
 				tokenStore.storeAccessToken(existingAccessToken, authentication);
 				return existingAccessToken;
 			}
-		}
+		}*/
 
 		// 只有在没有与过期的访问令牌关联的现有令牌时,才创建新的刷新令牌。
 		// 客户端可能持有现有的刷新令牌,所以我们在旧访问令牌过期的情况下重用它。
@@ -82,12 +82,12 @@ public class DolphinCustomTokenServices implements AuthorizationServerTokenServi
 			refreshToken = createRefreshToken(authentication);
 		}
 		// 但是如果刷新令牌已过期，则可能需要重新颁发它本身。
-		else if (refreshToken instanceof ExpiringOAuth2RefreshToken) {
+		/*else if (refreshToken instanceof ExpiringOAuth2RefreshToken) {
 			ExpiringOAuth2RefreshToken expiring = (ExpiringOAuth2RefreshToken) refreshToken;
 			if (System.currentTimeMillis() > expiring.getExpiration().getTime()) {
 				refreshToken = createRefreshToken(authentication);
 			}
-		}
+		}*/
 
 		OAuth2AccessToken accessToken = createAccessToken(authentication, refreshToken);
 		tokenStore.storeAccessToken(accessToken, authentication);
