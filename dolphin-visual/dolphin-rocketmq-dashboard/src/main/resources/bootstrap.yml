@@ -18,6 +18,7 @@ spring:
   cloud:
     nacos:
       discovery:
+        ip: @profiles.ip@
         server-addr: ${NACOS_HOST:dolphin-register}:${NACOS_PORT:8848}
         namespace: @profiles.namespace@
       config:

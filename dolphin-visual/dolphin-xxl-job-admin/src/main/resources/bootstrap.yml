@@ -9,6 +9,7 @@ spring:
   cloud:
     nacos:
       discovery:
+        ip: @profiles.ip@
         server-addr: ${NACOS_HOST:dolphin-register}:${NACOS_PORT:8848}
         metadata:
           management.context-path: ${server.servlet.context-path}/actuator

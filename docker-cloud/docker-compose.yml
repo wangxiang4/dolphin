@@ -42,7 +42,6 @@ services:
     build:
       context: ../dolphin-gateway
     container_name: dolphin-gateway
-    network_mode: host
     image: dolphin-gateway
     hostname: dolphin-gateway
     restart: always
@@ -54,7 +53,6 @@ services:
     build:
       context: ../dolphin-auth
     container_name: dolphin-auth
-    network_mode: host
     environment:
       GATEWAY_HOST: xxx.xxx.xxx.xxx
     image: dolphin-auth
@@ -68,7 +66,6 @@ services:
     build:
       context: ../dolphin-platform/dolphin-platform-biz/dolphin-system-biz
     container_name: dolphin-system
-    network_mode: host
     environment:
       GATEWAY_HOST: xxx.xxx.xxx.xxx
     image: dolphin-system-biz
@@ -82,7 +79,6 @@ services:
     build:
       context: ../dolphin-platform/dolphin-platform-biz/dolphin-common-biz
     container_name: dolphin-common
-    network_mode: host
     environment:
       GATEWAY_HOST: xxx.xxx.xxx.xxx
     image: dolphin-common-biz
@@ -96,7 +92,6 @@ services:
     build:
       context: ../dolphin-platform/dolphin-platform-biz/dolphin-monitor-biz
     container_name: dolphin-monitor
-    network_mode: host
     environment:
       GATEWAY_HOST: xxx.xxx.xxx.xxx
     image: dolphin-monitor-biz
@@ -112,7 +107,6 @@ services:
     build:
       context: ../dolphin-platform/dolphin-platform-biz/dolphin-template-biz
     container_name: dolphin-template
-    network_mode: host
     image: dolphin-template-biz
     hostname: dolphin-template
     restart: always
@@ -124,7 +118,6 @@ services:
     build:
       context: ../dolphin-visual/dolphin-rocketmq-dashboard
     container_name: dolphin-visual-rocketmq
-    network_mode: host
     image: dolphin-rocketmq-dashboard
     hostname: dolphin-visual-rocketmq
     restart: always
@@ -136,7 +129,6 @@ services:
     build:
       context: ../dolphin-visual/dolphin-sentinel-dashboard
     container_name: dolphin-visual-sentinel
-    network_mode: host
     image: dolphin-sentinel-dashboard
     hostname: dolphin-visual-sentinel
     restart: always
@@ -148,7 +140,6 @@ services:
     build:
       context: ../dolphin-visual/dolphin-xxl-job-admin
     container_name: dolphin-visual-job
-    network_mode: host
     image: dolphin-xxl-job-admin
     hostname: dolphin-visual-job
     restart: always
@@ -160,7 +151,6 @@ services:
     build:
       context: ../dolphin-visual/dolphin-spring-dashboard
     container_name: dolphin-visual-spring
-    network_mode: host
     restart: always
     image: dolphin-spring-dashboard
     hostname: dolphin-visual-spring

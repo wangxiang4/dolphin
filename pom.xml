@@ -234,6 +234,7 @@
 				<!-- 环境标识，需要与配置文件的名称相对应 -->
 				<profiles.namespace>dolphin-dev</profiles.namespace>
 				<profiles.group>DEV-GROUP</profiles.group>
+				<profiles.ip>123.60.163.167</profiles.ip>
 			</properties>
 			<activation>
 				<!-- 默认环境 -->
@@ -246,6 +247,7 @@
 				<!-- 环境标识，需要与配置文件的名称相对应 -->
 				<profiles.namespace>dolphin-prod</profiles.namespace>
 				<profiles.group>PROD-GROUP</profiles.group>
+				<profiles.ip>xxx.xxx.xxx.xxx</profiles.ip>
 			</properties>
 		</profile>
 		<profile>
@@ -254,6 +256,7 @@
 				<!-- 环境标识，需要与配置文件的名称相对应 -->
 				<profiles.namespace>dolphin-test</profiles.namespace>
 				<profiles.group>TEST-GROUP</profiles.group>
+				<profiles.ip>xxx.xxx.xxx.xxx</profiles.ip>
 			</properties>
 		</profile>
 	</profiles>
